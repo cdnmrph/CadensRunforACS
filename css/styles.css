@@ -247,4 +247,6 @@ footer { max-width: 82rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; font-size:
 .slide-photo img { position: absolute; inset: 1rem; width: calc(100% - 2rem); height: calc(100% - 2rem); object-fit: contain; border-radius: var(--radius); }
 @media (max-width: 69.99rem) {
   .slide-photo { aspect-ratio: 3 / 4; max-height: 80vh; }
+  /* Each slide keeps its own height. JS sizes the track to the current slide. */
+  .track { align-items: flex-start; }
 }
