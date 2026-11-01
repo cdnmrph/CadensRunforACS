@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caden's Run for ACS</title>
+  <meta name="description" content="I'm running the 2027 Chicago Marathon to raise money for the American Cancer Society. Help me go the distance.">
+  <meta name="theme-color" content="#C1C1C1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main id="top">
+    <h1 class="sr">Caden's Run for the ACS</h1>
+
+    <div class="dash" id="dash">
+
+      <!-- Countdown -->
+      <section class="panel olive countdown" aria-label="Countdown to race day">
+        <p class="cd-label">Until the Chicago Marathon</p>
+        <p class="cd-days"><span id="cd-days">0</span> <span class="cd-unit" id="cd-unit">days</span></p>
+        <p class="cd-rest" id="cd-rest"></p>
+        <p class="cd-date">Sunday, October 10, 2027</p>
+      </section>
+
+      <!-- Carousel: GivenGain widget and the challenges list (desktop) -->
+      <section class="panel carousel-panel" aria-label="Fundraiser and challenges">
+        <div class="track" id="track" tabindex="0">
+
+          <figure class="slide slide-photo">
+            <img src="assets/images/photos/image_6742069.jpg" alt="Caden smiling in a race medal and bib, giving a thumbs up in front of the Iowa State Capitol. Text on the photo reads: Thank you for visiting, every dollar, like, or kudos is appreciated!" width="2160" height="2880" decoding="async">
+          </figure>
+
+          <div class="slide slide-give" id="slide-give">
+            <div class="widget">
+              <givengain-project project-id="137724" theme="light" color-theme="emerald" api-url="https://partnerapi.givengain.com"></givengain-project>
+            </div>
+            <a class="btn" data-donate href="#">Visit my GivenGain page</a>
+            <p class="fine">Donations go straight to the American Cancer Society through GivenGain.</p>
+          </div>
+
+          <div class="slide slide-challenges" id="slide-challenges">
+            <h2 class="slide-title">Milestone challenges</h2>
+            <p class="slide-lead">Hit a number and I take on the challenge.</p>
+            <ol class="clist" id="clist"></ol>
+          </div>
+
+        </div>
+        <div class="carousel-controls" id="controls">
+          <button type="button" class="ctl" id="prev" aria-label="Previous slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 3.5 6 10l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          </button>
+          <div class="dots" id="dots"></div>
+          <button type="button" class="ctl" id="next" aria-label="Next slide">
+            <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 3.5 14 10l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Progress: segmented bar on desktop, vertical list with challenges on mobile -->
+      <section class="panel olive progress" aria-labelledby="progress-h">
+        <h2 class="sr" id="progress-h">Fundraising progress</h2>
+        <p class="progress-top"><strong class="raised-amt" data-raised>$0</strong> <span class="raised-of">raised of <span data-goal>$0</span></span></p>
+        <ol class="segments" id="segments"></ol>
+        <div class="vwrap" id="vwrap" tabindex="0" role="region" aria-label="Milestone challenges and progress">
+          <ol class="vlist" id="vlist"></ol>
+        </div>
+      </section>
+
+      <!-- Strava run log: embed on desktop, card that opens the app on mobile -->
+      <section class="panel feed strava" id="strava-panel" aria-labelledby="strava-h">
+        <h2 class="feed-title" id="strava-h">Strava</h2>
+        <p class="feed-note">If you're curious to see how my training is going, check out my Strava</p>
+        <div class="feed-embed" id="strava-embed"></div>
+        <a class="feed-card" id="strava-card" href="#" target="_blank" rel="noopener">
+          <span class="feed-card-title">Open Strava</span>
+          <span class="feed-card-sub">My latest runs</span>
+        </a>
+      </section>
+
+      <!-- Instagram button. Set instagramUrl in js/main.js to turn it on. -->
+      <section class="panel insta" id="insta-panel" aria-labelledby="insta-h">
+        <div class="insta-text">
+          <h2 class="feed-title" id="insta-h">Instagram</h2>
+          <p class="feed-note">I post each challenge on Instagram when a milestone is reached.</p>
+          <p class="insta-setup" id="insta-setup" hidden>Preview only: set instagramUrl in js/main.js to link your account. This box stays hidden on the live site until you do.</p>
+        </div>
+        <a class="btn" id="insta-btn" href="#" target="_blank" rel="noopener">Open Instagram</a>
+      </section>
+
+    </div>
+<!--
+    <section id="story" class="story">
+      <h2>Why I'm running</h2>
+      <p>There's many things that I love. Three of them are my friends and family, running, and the city of Chicago. Having the chance to combine all of them is a privilege I am lucky to have. Training, fundraising, and running this race is a small effort compared to what those who battle cancer have to face. Thank you for your support and be sure to check on the challenges I complete to make your donation more entertaining!</p>
+    </section> -->
+
+    <section class="final">
+      <h2>Help me reach the finish line</h2>
+      <p>Give what you can. Share the page if you can't. Anything helps, THANK YOU!!</p>
+      <a class="btn" data-donate href="#">Donate on GivenGain</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Caden's Run for the ACS. Donations are processed by GivenGain for the American Cancer Society.</p>
+  </footer>
+
+  <script src="https://widgetplayground.givengain.com/givengain-widgets.js" defer></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

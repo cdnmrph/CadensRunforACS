@@ -1,0 +1,250 @@
+/* Colors and font come from the Figma file. */
+:root {
+  --olive: #778266;
+  --grey: #C1C1C1;
+  --panel: #D9D9D9;
+  --ink: #000000;
+  --gap: 0.75rem;
+  --radius: 4px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--grey);
+  color: var(--ink);
+  font-family: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+ol { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* One scrollbar style everywhere: black thumb, clear track.
+   It matches the progress list on mobile and also reaches inside the GivenGain widget. */
+.vwrap, .slide, givengain-project { scrollbar-color: var(--ink) transparent; }
+givengain-project { --scrollbar-thumb: var(--ink); --scrollbar-track: transparent; }
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+main { max-width: 82rem; margin: 0 auto; padding: 3rem calc(var(--gap) * 2) calc(var(--gap) * 2); }
+
+/* ---------- Dashboard grid (mobile: one column, in DOM order) ---------- */
+.dash { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); }
+.panel { background: var(--panel); padding: 1rem; min-width: 0; }
+.olive { background: var(--olive); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--panel);
+  padding: 0.85rem 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.btn:hover { background: var(--olive); color: var(--ink); }
+.btn[aria-disabled="true"] { opacity: 0.4; cursor: not-allowed; }
+.btn[aria-disabled="true"]:hover { background: var(--ink); color: var(--panel); }
+.fine { margin-top: 0.75rem; font-size: 0.9rem; }
+
+/* ---------- Countdown ---------- */
+.countdown { display: flex; flex-direction: column; gap: 0.25rem; }
+.cd-label { font-weight: 600; }
+.cd-days {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: clamp(5.5rem, 26vw, 9rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.cd-unit { font-size: clamp(1.5rem, 5vw, 2.25rem); letter-spacing: -0.01em; }
+.cd-rest { font-size: 1.125rem; font-weight: 500; }
+.cd-date { margin-top: 0.5rem; }
+
+/* ---------- Carousel ---------- */
+.carousel-panel { padding: 0; display: flex; flex-direction: column; }
+.track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.track::-webkit-scrollbar { display: none; }
+.slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 1rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.widget { margin-bottom: 1rem; }
+givengain-project { display: block; }
+
+.slide-title { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.slide-lead { margin-top: 0.35rem; }
+
+.clist { margin-top: 1rem; }
+.citem {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 2px solid var(--ink);
+}
+.c-amount { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
+.c-title { font-weight: 700; }
+.c-status { margin-top: 0.2rem; font-weight: 600; }
+
+.carousel-controls { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 1rem 1rem; }
+.ctl {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: var(--ink);
+  color: var(--panel);
+  cursor: pointer;
+}
+.ctl:hover:not(:disabled) { background: var(--olive); color: var(--ink); }
+.ctl:disabled { opacity: 0.35; cursor: default; }
+.dots { display: flex; gap: 0.15rem; }
+.dot { position: relative; width: 1.5rem; height: 1.5rem; padding: 0; border: 0; background: none; cursor: pointer; }
+.dot::before { content: ""; position: absolute; inset: 0.375rem; border: 2px solid var(--ink); }
+.dot[aria-current="true"]::before { background: var(--ink); }
+
+/* The challenges slide is desktop only. On mobile the progress bar lists them. */
+.slide-challenges { display: none; }
+
+/* ---------- Progress ---------- */
+.progress-top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.2rem 0.75rem; margin-bottom: 1rem; }
+.raised-amt { font-size: clamp(2.5rem, 9vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+.raised-of { font-weight: 500; font-size: 1.1rem; }
+
+.segments { display: none; }
+
+.vwrap { max-height: 28rem; overflow-y: auto; padding-right: 0.5rem; }
+.vlist { display: flex; flex-direction: column; }
+.vitem { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr); gap: 1rem; padding-bottom: 0.375rem; }
+.rail { position: relative; min-height: 6rem; background: var(--panel); }
+.rail-fill { position: absolute; top: 0; left: 0; right: 0; height: 0; background: var(--ink); transition: height 0.9s ease-out; }
+.v-body { padding-bottom: 1rem; }
+.v-amount { font-size: 1.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; }
+.v-title { margin-top: 0.15rem; font-size: 1.125rem; font-weight: 700; }
+.v-desc { margin-top: 0.15rem; }
+.v-status { margin-top: 0.35rem; font-weight: 600; }
+
+/* ---------- Strava ---------- */
+.feed-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+.feed-note { margin-top: 0.35rem; }
+.feed-embed { margin-top: 0.75rem; }
+.feed-embed:empty { display: none; }
+.feed-embed iframe { display: block; width: 100%; border: 0; }
+.feed-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--ink);
+  color: var(--panel);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.feed-card:hover { background: var(--olive); color: var(--ink); }
+.feed-card-title { font-size: 1.25rem; font-weight: 700; }
+.feed.has-embed .feed-card { display: none; }
+
+/* ---------- Instagram button ---------- */
+.insta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.insta-text { flex: 1 1 16rem; min-width: 0; }
+.insta-setup { margin-top: 0.5rem; font-weight: 600; }
+
+/* ---------- Closing ---------- */
+.story, .final { max-width: 46rem; margin: 0 auto; padding: 3.5rem 1rem; }
+.story h2, .final h2 { margin-bottom: 1rem; font-size: clamp(1.9rem, 5vw, 2.75rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; }
+.story p { font-size: 1.15rem; max-width: 40rem; }
+.final p { margin-bottom: 1.5rem; font-size: 1.15rem; }
+.final { padding-top: 1rem; padding-bottom: 4rem; }
+
+footer { max-width: 82rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; font-size: 0.9rem; border-top: 2px solid var(--ink); }
+
+/* ---------- Desktop: your Figma layout ---------- */
+@media (min-width: 70rem) {
+  .dash {
+    grid-template-columns: minmax(0, 1fr) 28rem;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "carousel countdown"
+      "carousel strava"
+      "insta    strava"
+      "progress progress";
+  }
+  .dash.no-insta {
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "carousel countdown"
+      "carousel strava"
+      "progress progress";
+  }
+  .countdown { grid-area: countdown; }
+  .carousel-panel { grid-area: carousel; position: relative; min-height: 34rem; }
+  .strava { grid-area: strava; }
+  .insta { grid-area: insta; }
+  .progress { grid-area: progress; }
+
+  /* The carousel fills its grid area without making the rows taller. */
+  .track { position: absolute; inset: 0 0 4.25rem 0; }
+  .slide { overflow-y: auto; }
+  .carousel-controls { position: absolute; left: 0; right: 0; bottom: 0; height: 4.25rem; padding-top: 0; }
+  .slide-challenges { display: block; }
+
+  /* Segmented bar replaces the vertical list. Challenges stay in the carousel. */
+  .segments { display: flex; gap: 0.375rem; }
+  .seg { flex: 1 1 0; min-width: 0; }
+  .seg-bar { height: 1.75rem; background: var(--panel); }
+  .seg-fill { height: 100%; width: 0; background: var(--ink); transition: width 0.9s ease-out; }
+  .seg-label { display: block; margin-top: 0.4rem; text-align: right; font-weight: 600; }
+  .vwrap { display: none; }
+}
+
+/* ---------- Slightly rounded corners ---------- */
+.panel, .btn, .ctl, .feed-card, .seg-bar, .seg-fill, .rail, .rail-fill, .feed-embed iframe { border-radius: var(--radius); }
+
+/* Final section sits on the left edge, in line with the panels. */
+.final { margin: 0; padding-left: 0; padding-right: 0; text-align: left; }
+
+/* ---------- Photo slide ---------- */
+.slide-photo { position: relative; margin: 0; padding: 0; overflow: hidden; background: var(--panel); }
+.slide-photo img { position: absolute; inset: 1rem; width: calc(100% - 2rem); height: calc(100% - 2rem); object-fit: contain; border-radius: var(--radius); }
+@media (max-width: 69.99rem) {
+  .slide-photo { aspect-ratio: 3 / 4; max-height: 80vh; }
+}
