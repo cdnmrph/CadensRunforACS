@@ -242,11 +242,13 @@ footer { max-width: 82rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; font-size:
 /* Final section sits on the left edge, in line with the panels. */
 .final { margin: 0; padding-left: 0; padding-right: 0; text-align: left; }
 
-/* ---------- Photo slide ---------- */
+/* ---------- Photo slide (no padding) ---------- */
 .slide-photo { position: relative; margin: 0; padding: 0; overflow: hidden; background: var(--panel); }
-.slide-photo img { position: absolute; inset: 1rem; width: calc(100% - 2rem); height: calc(100% - 2rem); object-fit: contain; border-radius: var(--radius); }
+.slide-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 @media (max-width: 69.99rem) {
-  .slide-photo { aspect-ratio: 3 / 4; max-height: 80vh; }
+  /* Mobile: the slide is exactly as tall as the photo. */
+  .slide-photo { overflow: visible; }
+  .slide-photo img { position: static; display: block; width: 100%; height: auto; }
   /* Each slide keeps its own height. JS sizes the track to the current slide. */
   .track { align-items: flex-start; }
 }
