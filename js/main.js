@@ -170,21 +170,7 @@ function setupCarousel() {
     track.scrollTo({ left: target * track.clientWidth, behavior: reduceMotion ? "auto" : "smooth" });
   }
 
-  // On mobile the track is as tall as the slide in view, so a short slide leaves no gap.
-  const desktopQuery = window.matchMedia("(min-width: 70rem)");
-  function fitHeight() {
-    if (desktopQuery.matches) { track.style.height = ""; return; }
-    const slide = visibleSlides()[currentIndex()];
-    if (slide) track.style.height = slide.offsetHeight + "px";
-  }
-  if ("ResizeObserver" in window) {
-    const ro = new ResizeObserver(fitHeight);
-    $$(".slide", track).forEach(s => ro.observe(s));
-  }
-  window.addEventListener("resize", fitHeight);
-
   function update() {
-    fitHeight();
     const i = currentIndex();
     $$(".dot", dots).forEach((d, n) => d.setAttribute("aria-current", n === i ? "true" : "false"));
     prev.disabled = i <= 0;
@@ -217,24 +203,6 @@ function setupCarousel() {
       }
     });
     update();
-  }
-
-  // Auto-advance every 2 seconds and loop. Any interaction stops it for good.
-  let timer = null;
-  function stopAuto() {
-    if (timer) window.clearInterval(timer);
-    timer = null;
-  }
-  if (!reduceMotion) {
-    timer = window.setInterval(() => {
-      const count = visibleSlides().length;
-      if (count < 2) return;
-      const i = currentIndex();
-      goTo(i >= count - 1 ? 0 : i + 1);
-    }, 2000);
-    ["pointerdown", "touchstart", "wheel", "keydown", "focusin"].forEach(evt =>
-      panel.addEventListener(evt, stopAuto, { passive: true })
-    );
   }
 
   prev.addEventListener("click", () => goTo(currentIndex() - 1));
