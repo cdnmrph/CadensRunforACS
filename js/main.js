@@ -1,6 +1,7 @@
 // ===== EDIT THESE =====
 const CONFIG = {
   givengainUrl: "https://www.givengain.com/donate/ap/137724#amount",
+  givengainPageUrl: "https://www.givengain.com/project/caden-raising-funds-for-american-cancer-society-137724",  // "Visit my GivenGain page" button
   projectId: 137724,
   apiUrl: "https://partnerapi.givengain.com",
   goal: 2620,     // fundraising goal in dollars
@@ -48,6 +49,11 @@ function el(tag, className, text) {
 
 /* ---------- Donate links ---------- */
 function setDonateLinks() {
+  $$("[data-page]").forEach(a => {
+    a.href = CONFIG.givengainPageUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
   $$("[data-donate]").forEach(a => {
     a.href = CONFIG.givengainUrl;
     a.target = "_blank";
